@@ -125,7 +125,23 @@ Contraste deliberado con la Futura Std de Taurus: donde ellos son geométricos y
 nosotros somos condensados y angulares. El mono no es decoración — es el vernáculo del
 entrenamiento (series, repeticiones, fechas).
 
-Escala display: `clamp(3.5rem, 11vw, 9rem)`, `line-height: .82`, `letter-spacing: -.015em`.
+Escala display: `clamp(3.5rem, 11vw, 9rem)`, `letter-spacing: -.015em`.
+
+**El interlineado lo manda el español, no el gusto.** Los titulares van en mayúsculas y el idioma
+trae acentos en casi todas partes: DÍA, QUÉ, CATEGORÍAS, MEMBRESÍAS. Se midió el punto de colisión
+renderizando la misma frase a cinco interlineados:
+
+| `line-height` | Resultado |
+|---|---|
+| `.82` | El acento de DÍA se funde con la línea de arriba |
+| `.88` | Siguen tocándose |
+| `.92` | Al límite |
+| `.96` | Limpio |
+
+Regla: los titulares de más de una línea usan **`.95`**, y todo titular display lleva
+`padding-top: .08em` para que el acento de la primera línea no quede cortado. Los tres paneles del
+Acto I conservan `.82` solo porque su copy no lleva acentos — es una excepción condicionada al
+texto, no una licencia.
 
 ---
 
