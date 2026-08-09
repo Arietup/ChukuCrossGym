@@ -91,9 +91,24 @@ Muestreado píxel a píxel del logo, no elegido a criterio:
 --hueso:    #EFE9DE;  /* claro cálido, superficie principal clara */
 --hueso-2:  #FBF8F3;  /* claro más alto */
 --piedra:   #C9C0B2;  /* bordes y separadores sobre claro */
---gris:     #8A8378;  /* texto secundario, legible sobre ambos fondos */
+--gris:     #8A8378;  /* texto secundario SOBRE OSCURO */
+--tinta:    #5A534B;  /* texto secundario SOBRE CLARO */
 --blanco:   #FFFFFF;  /* solo texto sobre bermellón y sobre foto */
 ```
+
+**`--gris` y `--tinta` no son intercambiables.** Son el mismo rol tipográfico en dos fondos, y la
+razón es de contraste medido, no de gusto:
+
+| Combinación | Contraste | AA (4.5:1) |
+|---|---|---|
+| `--gris` sobre `--carbon` | 6.9:1 | ✓ |
+| `--gris` sobre `--hueso` | 3.10:1 | ✗ |
+| `--tinta` sobre `--hueso` | 6.27:1 | ✓ |
+
+Usar `--gris` para texto secundario sobre fondo claro deja el párrafo por debajo del mínimo
+accesible — se desvanece en un celular a pleno sol, que es exactamente el contexto de uso en
+El Triunfo. Ningún color se escribe a mano en el CSS: todo es `var(--token)`, salvo `rgba()` de
+`--carbon` y `--hueso` cuando hace falta transparencia.
 
 Los neutros están tintados hacia el **cálido** a propósito. Es la oposición directa a los grises
 fríos de Taurus, y es lo que permite que convivan con el bermellón sin vibrar.
@@ -110,7 +125,23 @@ Contraste deliberado con la Futura Std de Taurus: donde ellos son geométricos y
 nosotros somos condensados y angulares. El mono no es decoración — es el vernáculo del
 entrenamiento (series, repeticiones, fechas).
 
-Escala display: `clamp(3.5rem, 11vw, 9rem)`, `line-height: .82`, `letter-spacing: -.015em`.
+Escala display: `clamp(3.5rem, 11vw, 9rem)`, `letter-spacing: -.015em`.
+
+**El interlineado lo manda el español, no el gusto.** Los titulares van en mayúsculas y el idioma
+trae acentos en casi todas partes: DÍA, QUÉ, CATEGORÍAS, MEMBRESÍAS. Se midió el punto de colisión
+renderizando la misma frase a cinco interlineados:
+
+| `line-height` | Resultado |
+|---|---|
+| `.82` | El acento de DÍA se funde con la línea de arriba |
+| `.88` | Siguen tocándose |
+| `.92` | Al límite |
+| `.96` | Limpio |
+
+Regla: los titulares de más de una línea usan **`.95`**, y todo titular display lleva
+`padding-top: .08em` para que el acento de la primera línea no quede cortado. Los tres paneles del
+Acto I conservan `.82` solo porque su copy no lleva acentos — es una excepción condicionada al
+texto, no una licencia.
 
 ---
 
@@ -247,11 +278,20 @@ const CONFIG = {
   igGym:    'https://www.instagram.com/chukucross/',
   igCoach:  'https://www.instagram.com/anthonyfit20/',
   tiktok:   '',                          // PENDIENTE: si queda vacío, el enlace no se pinta
-  correo:   'anthony_1908@yahoo.com',
-  horario:  { semana: 'Lun a Vie · 7:00–12:00 y 16:00–21:00', sabado: 'Sáb · 8:00–12:00' },
-  evento:   { inicio: '2026-08-09T10:00:00-05:00' }
+  evento:   { inicio: '2026-08-09T10:00:00-05:00', duracionHoras: 12 }
 };
 ```
+
+**El horario y el correo NO están aquí: viven en el HTML.** Es una corrección deliberada. Ponerlos
+en `CONFIG` los volvía dependientes de JavaScript, y si el script no carga —bloqueador, política
+corporativa, red caída a media descarga— el visitante ve un guion donde deberían estar las horas de
+atención y el correo del gym. Son justamente los dos datos por los que alguien entra a la página, y
+el fallo es silencioso: no hay error, solo un guion.
+
+La regla general que se deriva: **`CONFIG` es para lo que el JavaScript necesita manipular**
+(componer un enlace de WhatsApp, calcular fases, ocultar una red vacía). El contenido que solo se
+lee va en el HTML, donde sobrevive sin scripts. Comodidad de edición no vale una página que se
+vacía en silencio.
 
 Los enlaces se aplican por `data-wa` / `data-social` recorriendo el DOM una vez. **Un enlace social
 con valor vacío se oculta en lugar de apuntar a `#`** — un enlace muerto es peor que ninguno.
@@ -313,9 +353,26 @@ Navegación: barra fija con logo; menú hamburguesa a pantalla completa bajo 900
   la regresiva y en el contador de actos, que son los dos únicos lugares donde el movimiento
   comunica algo. Todo el contenido es visible aunque el JavaScript falle por completo.
 - Foco de teclado visible en todos los interactivos; el formulario es operable solo con teclado.
+- **La regresiva no se anuncia dígito a dígito.** Un `aria-live` sobre un elemento que cambia cada
+  segundo deja a un lector de pantalla dictando números sin parar, y vuelve la página inutilizable
+  para quien lo usa. Los dígitos son visuales; el anuncio vive en un párrafo solo para lectores de
+  pantalla que cambia de texto únicamente al cruzar un umbral:
+
+  | Falta | Anuncio |
+  |---|---|
+  | más de un día | «Faltan 2 días para el conversatorio» |
+  | entre 1 hora y 1 día | «Faltan 11 horas para el conversatorio» |
+  | menos de 1 hora | «Faltan 23 minutos para el conversatorio» |
+  | menos de 1 minuto | «El conversatorio empieza en menos de un minuto» |
+
+  La granularidad sube conforme se acerca la hora: minutos en la última hora, que es cuando el dato
+  importa. La función que arma esa frase es pura y vive en `logic.js` con su prueba.
 - `alt` descriptivo real en cada foto; el mapa embebido lleva `title`.
-- Contraste mínimo AA: texto sobre bermellón siempre blanco puro; `--gris` verificado sobre carbón
-  y sobre hueso.
+- Contraste mínimo AA: texto sobre bermellón siempre blanco puro. `--gris` solo sobre carbón —
+  sobre hueso da 3.10:1 y no cumple, ahí va `--tinta`.
+- **Cada enlace debe distinguirse leído fuera de contexto.** Un lector de pantalla puede listar los
+  enlaces de la página sin el texto que los rodea; tres botones que dicen solo «Consultar» son
+  indistinguibles ahí. Los CTA que se repiten llevan `aria-label` nombrando su plan.
 - Fotos con `loading="lazy"`. Si una falta, el marco conserva su etiqueta estilizada en vez de
   mostrar el ícono roto del navegador.
 - El contenido revelado por scroll debe ser visible si el JS falla (los estilos de revelado se

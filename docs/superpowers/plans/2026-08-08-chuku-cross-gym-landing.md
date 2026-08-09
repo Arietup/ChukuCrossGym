@@ -15,7 +15,11 @@
 - Idioma de toda la interfaz: español ecuatoriano. Sentence case en párrafos, mayúsculas solo en display y etiquetas mono.
 - Marca escrita siempre **Chuku Cross Gym** (nunca "Churu", nunca "Chuku Cross" a secas en texto corrido).
 - Un solo número de WhatsApp en toda la página: `593995128564`. Los CTAs cambian el mensaje, jamás el destino.
-- Paleta exacta: `--naranja #E4411F`, `--brasa #B32C10`, `--carbon #0E0D0C`, `--carbon-2 #2A2724`, `--hueso #EFE9DE`, `--hueso-2 #FBF8F3`, `--piedra #C9C0B2`, `--gris #8A8378`.
+- Paleta exacta, **diez tokens**: `--naranja #E4411F`, `--brasa #B32C10`, `--carbon #0E0D0C`, `--carbon-2 #2A2724`, `--hueso #EFE9DE`, `--hueso-2 #FBF8F3`, `--piedra #C9C0B2`, `--gris #8A8378`, `--tinta #5A534B`, `--blanco #FFFFFF`.
+- `--blanco` es blanco puro y se usa **solo** para texto sobre bermellón y sobre foto. Sobre fondos oscuros o claros nunca: ahí van `--hueso` y `--carbon`.
+- **Ningún color a mano.** Todo color se escribe `var(--token)`. Únicas excepciones, porque `var()` no transporta alfa: `rgba(14,13,12,α)`, `rgba(239,233,222,α)` y `rgba(255,255,255,α)` — son `--carbon`, `--hueso` y `--blanco` con opacidad, no colores nuevos.
+- **Acentos en display.** Los titulares van en mayúsculas y en español, así que `Á É Í Ó Ú Ñ` aparecen constantemente. Con `line-height` por debajo de `.95`, el acento de una línea choca con la línea de arriba y el de la primera línea se corta. Regla: titulares de más de una línea que puedan llevar acento usan `line-height:.95`; todo titular display lleva además `padding-top:.08em` para dar aire al acento de la primera línea. Los paneles del Acto I conservan `.82` únicamente porque su copy no tiene acentos — si esa copy cambia, sube el `line-height`.
+- `--gris` es texto secundario **sobre oscuro**; `--tinta` es texto secundario **sobre claro**. No intercambiarlos: `--gris` sobre `--hueso` da 3.10:1 y falla AA; `--tinta` da 6.27:1 y pasa.
 - Tipografía: Big Shoulders Display 900 (display), Archivo 400/600 (lectura), Space Mono 400/700 (datos).
 - Fecha del evento: `2026-08-09T10:00:00-05:00`. Duración 12 h.
 - Horario publicado: `Lun a Vie · 7:00–12:00 y 16:00–21:00` y `Sáb · 8:00–12:00`. **No publicar nada sobre el domingo.**
@@ -23,6 +27,7 @@
 - Correo: `anthony_1908@yahoo.com`. IG gym `https://www.instagram.com/chukucross/`. IG coach `https://www.instagram.com/anthonyfit20/`.
 - Toda imagen lleva `loading="lazy"` y `alt` descriptivo real (nunca `alt=""` salvo decorativas puras).
 - `prefers-reduced-motion: reduce` debe desactivar scroll suave, `scroll-snap`, transiciones y zoom de galería; la regresiva pasa a 60 s.
+- **Ninguna región `aria-live` puede colgar de un elemento que cambia cada segundo.** Los dígitos de la regresiva son visuales y no se anuncian. El anuncio para lector de pantalla vive en un párrafo aparte que solo cambia de texto al cruzar un umbral (día → hora → minuto), de modo que suena unas pocas veces por hora y una vez por minuto en la última hora.
 - **Sin animaciones de revelado por scroll y sin cinta deslizante.** El movimiento vive solo en la regresiva y el contador de actos. Todo el contenido debe ser legible aunque el JS falle por completo — no ocultar nada con CSS que dependa de JavaScript para mostrarse.
 
 ## File Structure
@@ -332,7 +337,7 @@ Run: `grep -nE 'document|window|navigator' logic.js` → Expected: sin resultado
   --naranja:#E4411F; --brasa:#B32C10;
   --carbon:#0E0D0C; --carbon-2:#2A2724;
   --hueso:#EFE9DE; --hueso-2:#FBF8F3;
-  --piedra:#C9C0B2; --gris:#8A8378;
+  --piedra:#C9C0B2; --gris:#8A8378; --tinta:#5A534B; --blanco:#FFFFFF;
   --display:'Big Shoulders Display',Impact,'Arial Narrow',sans-serif;
   --texto:'Archivo',system-ui,sans-serif;
   --dato:'Space Mono',ui-monospace,monospace;
@@ -346,7 +351,7 @@ img{max-width:100%;display:block}
 a{color:inherit}
 
 .skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--naranja);
-  color:#fff;padding:12px 18px;font-weight:700}
+  color:var(--blanco);padding:12px 18px;font-weight:700}
 .skip:focus{left:0}
 :focus-visible{outline:3px solid var(--naranja);outline-offset:3px}
 
@@ -358,7 +363,7 @@ a{color:inherit}
 .btn{font-family:var(--texto);font-weight:700;font-size:.82rem;letter-spacing:.05em;
   text-transform:uppercase;text-decoration:none;padding:15px 26px;display:inline-block;
   border:2px solid transparent;transition:background .18s,color .18s,border-color .18s}
-.btn--naranja{background:var(--naranja);color:#fff}
+.btn--naranja{background:var(--naranja);color:var(--blanco)}
 .btn--naranja:hover{background:var(--brasa)}
 .btn--hueso{background:transparent;color:var(--hueso);border-color:var(--hueso)}
 .btn--hueso:hover{background:var(--hueso);color:var(--carbon)}
@@ -462,7 +467,7 @@ En `index.html`, sustituir `<div id="actos"></div>` por:
 .panel--gym{background:var(--carbon-2)}
 .panel--gym .panel__title span{color:var(--naranja)}
 .panel--coach{background:var(--hueso);color:var(--carbon)}
-.panel--coach .panel__lead{color:#5a534b}
+.panel--coach .panel__lead{color:var(--tinta)}
 .panel--coach .panel__eyebrow{color:var(--brasa)}
 
 .panel__bg{position:absolute;inset:0;z-index:1}
@@ -632,7 +637,7 @@ Insertar antes del cierre de la IIFE:
 
   function pintarCuenta(e) {
     elSlot.innerHTML =
-      '<ol class="cuenta" aria-live="polite">' +
+      '<ol class="cuenta">' +
         '<li><b>' + String(e.d).padStart(2,'0') + '</b><span>Días</span></li>' +
         '<li><b>' + String(e.h).padStart(2,'0') + '</b><span>Horas</span></li>' +
         '<li><b>' + String(e.m).padStart(2,'0') + '</b><span>Min</span></li>' +
@@ -733,12 +738,13 @@ Expected: `✓ estadoEvento` y `✓ mensajeWhatsApp`
   color:rgba(239,233,222,.55);z-index:2}
 .banda__txt{padding:clamp(38px,6vw,84px)}
 .banda__txt h2{font-family:var(--display);font-weight:900;text-transform:uppercase;
-  line-height:.86;letter-spacing:-.012em;font-size:clamp(2.6rem,5.2vw,4.6rem);margin:14px 0 22px}
+  line-height:.95;letter-spacing:-.012em;font-size:clamp(2.6rem,5.2vw,4.6rem);
+  margin:14px 0 22px;padding-top:.08em}
 .banda__txt p{max-width:52ch}
 .banda--oscura{background:var(--carbon)}
 .banda--clara{background:var(--hueso);color:var(--carbon)}
-.banda--clara p{color:#5a534b}
-.banda--naranja{background:var(--naranja);color:#fff}
+.banda--clara p{color:var(--tinta)}
+.banda--naranja{background:var(--naranja);color:var(--blanco)}
 .banda--naranja p{color:rgba(255,255,255,.9)}
 .banda--naranja .mono{color:rgba(255,255,255,.8)}
 
@@ -746,14 +752,14 @@ Expected: `✓ estadoEvento` y `✓ mensajeWhatsApp`
 .seccion--clara{background:var(--hueso);color:var(--carbon)}
 .seccion__head{margin-bottom:52px}
 .seccion__head h2{font-family:var(--display);font-weight:900;text-transform:uppercase;
-  line-height:.86;font-size:clamp(2.6rem,6vw,5.2rem);margin:14px 0 0}
+  line-height:.95;font-size:clamp(2.6rem,6vw,5.2rem);margin:14px 0 0;padding-top:.08em}
 
 .grid-programa{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;
   background:var(--piedra)}
 .grid-programa article{background:var(--hueso);padding:34px 30px 38px}
 .grid-programa h3{font-family:var(--display);font-weight:800;text-transform:uppercase;
   font-size:1.85rem;line-height:.9;margin:16px 0 12px}
-.grid-programa p{color:#5a534b;font-size:.95rem;margin:0}
+.grid-programa p{color:var(--tinta);font-size:.95rem;margin:0}
 .grid-programa .kb{width:26px;height:26px;display:block;color:var(--naranja)}
 .grid-programa .kb svg{width:100%;height:100%;fill:currentColor}
 
@@ -871,25 +877,26 @@ Deshacer con `document.body.classList.remove('fase-pasado')`.
   font-family:var(--display);font-weight:700;font-size:1.7rem;line-height:1.08;
   text-transform:none;letter-spacing:0}
 .cita cite{display:block;font-family:var(--dato);font-size:.62rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--gris);font-style:normal;margin-top:14px}
+  text-transform:uppercase;color:var(--tinta);font-style:normal;margin-top:14px}
 
 .redes{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
 .chip{font-family:var(--dato);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
   padding:11px 16px;border:1px solid currentColor;text-decoration:none;transition:background .18s,color .18s}
 .chip:hover{background:var(--carbon);color:var(--hueso)}
 
+.seccion--naranja{background:var(--naranja);color:var(--blanco)}
 .planes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:12px}
 .plan{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);
   padding:34px 28px 30px;display:flex;flex-direction:column}
-.plan--destacado{background:#fff;color:var(--carbon);border-color:#fff}
+.plan--destacado{background:var(--blanco);color:var(--carbon);border-color:var(--blanco)}
 .plan__flag{font-family:var(--dato);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;
-  background:var(--carbon);color:#fff;padding:5px 10px;align-self:flex-start;margin-bottom:14px}
+  background:var(--carbon);color:var(--hueso);padding:5px 10px;align-self:flex-start;margin-bottom:14px}
 .plan h3{font-family:var(--display);font-weight:900;text-transform:uppercase;
   font-size:2.2rem;margin:0 0 8px;line-height:.9}
 .plan ul{list-style:none;padding:0;margin:16px 0 26px;flex:1}
 .plan li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.18);font-size:.92rem}
 .plan--destacado li{border-color:rgba(14,13,12,.12)}
-.plan li::before{content:'✓';color:var(--naranja);font-weight:700;margin-right:10px}
+.plan li::before{content:'✓';color:var(--blanco);font-weight:700;margin-right:10px}
 .plan--destacado li::before{color:var(--brasa)}
 .planes__nota{font-family:var(--dato);font-size:.62rem;letter-spacing:.1em;
   color:rgba(255,255,255,.75);margin-top:22px;text-transform:uppercase}
@@ -944,7 +951,7 @@ Deshacer con `document.body.classList.remove('fase-pasado')`.
   </div>
 </section>
 
-<section class="seccion" id="planes" style="background:var(--naranja);color:#fff">
+<section class="seccion seccion--naranja" id="planes">
   <div class="wrap">
     <header class="seccion__head">
       <p class="mono" style="color:rgba(255,255,255,.85)">Membresías</p>
@@ -1156,7 +1163,7 @@ Expected: `✓ estadoEvento` y `✓ mensajeWhatsApp`
   letter-spacing:.12em;text-transform:uppercase;margin:44px 0 0;
   border-top:1px solid rgba(239,233,222,.1);padding-top:24px}
 
-.flota{position:fixed;right:20px;bottom:20px;z-index:45;background:var(--naranja);color:#fff;
+.flota{position:fixed;right:20px;bottom:20px;z-index:45;background:var(--naranja);color:var(--blanco);
   border-radius:50px;padding:14px 20px;display:flex;align-items:center;gap:10px;
   text-decoration:none;font-weight:700;font-size:.86rem;
   box-shadow:0 10px 30px rgba(0,0,0,.4);transition:background .18s,transform .18s}
