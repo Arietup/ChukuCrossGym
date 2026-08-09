@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { estadoEvento, mensajeWhatsApp } = require('./logic.js');
+const { estadoEvento, mensajeWhatsApp, resumenRegresiva } = require('./logic.js');
 
 const INICIO = '2026-08-09T10:00:00-05:00';
 
@@ -42,6 +42,26 @@ assert.equal(estadoEvento(INICIO, new Date('2026-08-01T00:00:00-05:00')).fase, '
 assert.equal(estadoEvento(INICIO, Date.parse('2026-12-01T00:00:00-05:00')).fase, 'pasado');
 
 console.log('✓ estadoEvento');
+
+// resumenRegresiva: frase para el lector de pantalla, solo cambia por umbral
+const resumenCasos = [
+  [{ fase: 'antes', d: 2,  h: 5,  m: 10, s: 0  }, 'Faltan 2 días para el conversatorio'],
+  [{ fase: 'antes', d: 1,  h: 0,  m: 0,  s: 0  }, 'Falta 1 día para el conversatorio'],
+  [{ fase: 'antes', d: 0,  h: 11, m: 30, s: 0  }, 'Faltan 11 horas para el conversatorio'],
+  [{ fase: 'antes', d: 0,  h: 1,  m: 0,  s: 0  }, 'Falta 1 hora para el conversatorio'],
+  [{ fase: 'antes', d: 0,  h: 0,  m: 23, s: 45 }, 'Faltan 23 minutos para el conversatorio'],
+  [{ fase: 'antes', d: 0,  h: 0,  m: 1,  s: 0  }, 'Falta 1 minuto para el conversatorio'],
+  [{ fase: 'antes', d: 0,  h: 0,  m: 0,  s: 37 }, 'El conversatorio empieza en menos de un minuto']
+];
+for (const [e, esperado] of resumenCasos) {
+  assert.equal(resumenRegresiva(e), esperado, JSON.stringify(e));
+}
+
+// las fases hoy y pasado no tienen regresiva que anunciar
+assert.equal(resumenRegresiva({ fase: 'hoy', d: 0, h: 0, m: 0, s: 0 }), '');
+assert.equal(resumenRegresiva({ fase: 'pasado', d: 0, h: 0, m: 0, s: 0 }), '');
+
+console.log('✓ resumenRegresiva');
 
 const NUM = '593995128564';
 

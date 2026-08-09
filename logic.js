@@ -35,4 +35,13 @@ function mensajeWhatsApp(numero, datos) {
   return { ok: true, url: `https://wa.me/${numero}?text=${encodeURIComponent(lineas.join('\n'))}` };
 }
 
-if (typeof module !== 'undefined') module.exports = { estadoEvento, mensajeWhatsApp };
+function resumenRegresiva(e) {
+  if (e.fase !== 'antes') return '';
+
+  if (e.d >= 1) return e.d === 1 ? 'Falta 1 día para el conversatorio' : `Faltan ${e.d} días para el conversatorio`;
+  if (e.h >= 1) return e.h === 1 ? 'Falta 1 hora para el conversatorio' : `Faltan ${e.h} horas para el conversatorio`;
+  if (e.m >= 1) return e.m === 1 ? 'Falta 1 minuto para el conversatorio' : `Faltan ${e.m} minutos para el conversatorio`;
+  return 'El conversatorio empieza en menos de un minuto';
+}
+
+if (typeof module !== 'undefined') module.exports = { estadoEvento, mensajeWhatsApp, resumenRegresiva };

@@ -96,13 +96,24 @@
 
   function pintarCuenta(e) {
     elSlot.innerHTML =
-      '<ol class="cuenta" aria-live="polite">' +
+      '<ol class="cuenta">' +
         '<li><b>' + String(e.d).padStart(2,'0') + '</b><span>Días</span></li>' +
         '<li><b>' + String(e.h).padStart(2,'0') + '</b><span>Horas</span></li>' +
         '<li><b>' + String(e.m).padStart(2,'0') + '</b><span>Min</span></li>' +
         '<li><b>' + String(e.s).padStart(2,'0') + '</b><span>Seg</span></li>' +
       '</ol>' +
+      '<p class="sr-solo" id="cuenta-resumen" aria-live="polite"></p>' +
       '<div class="panel__cta">' + TEXTOS.antes.cta + '</div>';
+    actualizarResumen(e);
+  }
+
+  // el resumen para lector de pantalla solo se reescribe si el texto cambió,
+  // si no cada tick de 1s reactivaría el aria-live y ahogaría al lector
+  function actualizarResumen(e) {
+    const p = document.getElementById('cuenta-resumen');
+    if (!p) return;
+    const texto = resumenRegresiva(e);
+    if (p.textContent !== texto) p.textContent = texto;
   }
 
   function aplicarFase(e) {
@@ -115,6 +126,7 @@
           b[2].textContent = String(e.m).padStart(2,'0');
           b[3].textContent = String(e.s).padStart(2,'0');
         }
+        actualizarResumen(e);
       }
       return;
     }
