@@ -443,7 +443,7 @@ En `index.html`, sustituir `<div id="actos"></div>` por:
     <div class="panel__marca" aria-hidden="true"></div>
     <div class="panel__in">
       <p class="mono panel__eyebrow">Coach y fundador</p>
-      <h2 class="display panel__title">Anthony<br><span>Ramires</span></h2>
+      <h2 class="display panel__title">Anthony<br><span>Ramirez</span></h2>
       <p class="panel__lead">Fe como motor, disciplina como método y la juventud de El Triunfo como propósito.</p>
     </div>
   </section>
@@ -930,17 +930,17 @@ Deshacer con `document.body.classList.remove('fase-pasado')`.
 </section>
 
 <section class="banda banda--clara banda--invertida" id="nosotros">
-  <div class="banda__foto" data-etiqueta="Coach Anthony Ramires">
-    <img src="assets/coach.jpg" alt="Anthony Ramires, coach y fundador del Chuku Cross Gym" loading="lazy">
+  <div class="banda__foto" data-etiqueta="Coach Anthony Ramirez">
+    <img src="assets/coach.jpg" alt="Anthony Ramirez, coach y fundador del Chuku Cross Gym" loading="lazy">
   </div>
   <div class="banda__txt">
     <p class="mono" style="color:var(--brasa)">Quiénes somos</p>
     <h2>Lo que se<br>levanta aquí<br>empieza en<br>la fe</h2>
-    <p>Anthony Ramires construyó el Chuku Cross Gym con Dios como motor y una idea simple: la disciplina que se aprende cargando un disco sirve para todo lo demás.</p>
+    <p>Anthony Ramirez construyó el Chuku Cross Gym con Dios como motor y una idea simple: la disciplina que se aprende cargando un disco sirve para todo lo demás.</p>
     <p>Su trabajo va más allá de la rutina. Formar juventud en El Triunfo es la razón del proyecto: darle a los chicos del cantón un lugar donde llegar después del colegio, una meta que perseguir y gente que les exija en serio. Aquí no se entrena solo el cuerpo; se enseña puntualidad, respeto y palabra cumplida.</p>
     <p>Por eso el gym impulsa el deporte local, abre sus puertas a eventos como el conversatorio del 9 de agosto y acompaña a quien quiere competir. Si vienes por salud, por estética o por tarima, el trato es el mismo: se te enseña, se te corrige y se te acompaña.</p>
 
-    <blockquote class="cita">Un atleta no se construye en el escenario. Se construye los días que nadie te ve entrenar.<cite>Anthony Ramires</cite></blockquote>
+    <blockquote class="cita">Un atleta no se construye en el escenario. Se construye los días que nadie te ve entrenar.<cite>Anthony Ramirez</cite></blockquote>
 
     <div class="redes" id="coach-redes">
       <a class="btn btn--naranja" href="#" data-wa data-wa-msg="Hola coach, quiero asesoría en el Chuku Cross Gym.">WhatsApp del coach</a>
@@ -1227,7 +1227,7 @@ Después de la sección de contacto, y el botón flotante justo antes de los `<s
       <a href="#" data-wa data-wa-msg="Hola, quiero información del Chuku Cross Gym.">WhatsApp</a>
     </div>
   </div>
-  <p class="pie__legal">© <span id="anio">2026</span> Chuku Cross Gym · Coach Anthony Ramires</p>
+  <p class="pie__legal">© <span id="anio">2026</span> Chuku Cross Gym · Coach Anthony Ramirez</p>
 </footer>
 
 <a class="flota" href="#" data-wa data-wa-msg="Hola, quiero información del Chuku Cross Gym." aria-label="Escribir por WhatsApp">

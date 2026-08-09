@@ -9,7 +9,7 @@
 ## 1. Contexto y objetivo
 
 Chuku Cross Gym es un gimnasio en el cantón El Triunfo (provincia del Guayas, Ecuador), dirigido por
-el coach Anthony Ramires. La página cumple dos trabajos a la vez:
+el coach Anthony Ramirez. La página cumple dos trabajos a la vez:
 
 1. **Anunciar y llenar** el conversatorio de culturismo del **9 de agosto de 2026**.
 2. **Ser la web permanente del gym** una vez que ese evento pase.
@@ -25,7 +25,7 @@ todo camino termina en un chat con el gym o con el coach.
 | Ciudad | El Triunfo, Guayas, Ecuador |
 | Dirección | Cdla. Jaime Roldós, Muro de Berlín |
 | Referencia | Frente al puente peatonal |
-| Coach | Anthony Ramires |
+| Coach | Anthony Ramirez |
 | Horario | Lun–Vie 7:00–12:00 y 16:00–21:00 · Sáb 8:00–12:00 |
 | Correo | anthony_1908@yahoo.com |
 | IG gym | https://www.instagram.com/chukucross/ |
@@ -322,7 +322,7 @@ hasta que se confirmen, con remisión a redes.
 
 ### Membresías
 
-Diario · Mensual (destacado) · Trimestral. **Sin precio.** Cada tarjeta lista lo que incluye y su
+Diario · Mensual (destacado). **Sin precio.** Cada tarjeta lista lo que incluye y su
 CTA abre WhatsApp con el plan ya escrito en el mensaje. Decisión de negocio: evita competir por
 precio contra Smart Fit, permite subir tarifas sin tocar la web y lleva la venta al chat donde el
 coach cierra.
