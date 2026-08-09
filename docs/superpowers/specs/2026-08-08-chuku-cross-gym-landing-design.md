@@ -278,11 +278,20 @@ const CONFIG = {
   igGym:    'https://www.instagram.com/chukucross/',
   igCoach:  'https://www.instagram.com/anthonyfit20/',
   tiktok:   '',                          // PENDIENTE: si queda vacío, el enlace no se pinta
-  correo:   'anthony_1908@yahoo.com',
-  horario:  { semana: 'Lun a Vie · 7:00–12:00 y 16:00–21:00', sabado: 'Sáb · 8:00–12:00' },
-  evento:   { inicio: '2026-08-09T10:00:00-05:00' }
+  evento:   { inicio: '2026-08-09T10:00:00-05:00', duracionHoras: 12 }
 };
 ```
+
+**El horario y el correo NO están aquí: viven en el HTML.** Es una corrección deliberada. Ponerlos
+en `CONFIG` los volvía dependientes de JavaScript, y si el script no carga —bloqueador, política
+corporativa, red caída a media descarga— el visitante ve un guion donde deberían estar las horas de
+atención y el correo del gym. Son justamente los dos datos por los que alguien entra a la página, y
+el fallo es silencioso: no hay error, solo un guion.
+
+La regla general que se deriva: **`CONFIG` es para lo que el JavaScript necesita manipular**
+(componer un enlace de WhatsApp, calcular fases, ocultar una red vacía). El contenido que solo se
+lee va en el HTML, donde sobrevive sin scripts. Comodidad de edición no vale una página que se
+vacía en silencio.
 
 Los enlaces se aplican por `data-wa` / `data-social` recorriendo el DOM una vez. **Un enlace social
 con valor vacío se oculta en lugar de apuntar a `#`** — un enlace muerto es peor que ninguno.
