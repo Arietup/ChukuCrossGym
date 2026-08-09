@@ -99,3 +99,41 @@ a{color:inherit}
 
 .sr-solo{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+
+.banda{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:74vh}
+.banda--invertida .banda__foto{order:2}
+.banda__foto{position:relative;min-height:74vh;background:var(--carbon-2)}
+.banda__foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.banda__foto::after{content:attr(data-etiqueta);position:absolute;left:20px;bottom:18px;
+  font-family:var(--dato);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(239,233,222,.55);z-index:2}
+.banda__txt{padding:clamp(38px,6vw,84px)}
+.banda__txt h2{font-family:var(--display);font-weight:900;text-transform:uppercase;
+  line-height:.86;letter-spacing:-.012em;font-size:clamp(2.6rem,5.2vw,4.6rem);margin:14px 0 22px}
+.banda__txt p{max-width:52ch}
+.banda--oscura{background:var(--carbon)}
+.banda--clara{background:var(--hueso);color:var(--carbon)}
+.banda--clara p{color:var(--tinta)}
+.banda--naranja{background:var(--naranja);color:#fff}
+.banda--naranja p{color:rgba(255,255,255,.9)}
+.banda--naranja .mono{color:rgba(255,255,255,.8)}
+
+.seccion{padding:clamp(64px,9vw,120px) 0}
+.seccion--clara{background:var(--hueso);color:var(--carbon)}
+.seccion__head{margin-bottom:52px}
+.seccion__head h2{font-family:var(--display);font-weight:900;text-transform:uppercase;
+  line-height:.86;font-size:clamp(2.6rem,6vw,5.2rem);margin:14px 0 0}
+
+.grid-programa{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;
+  background:var(--piedra)}
+.grid-programa article{background:var(--hueso);padding:34px 30px 38px}
+.grid-programa h3{font-family:var(--display);font-weight:800;text-transform:uppercase;
+  font-size:1.85rem;line-height:.9;margin:16px 0 12px}
+.grid-programa p{color:var(--tinta);font-size:.95rem;margin:0}
+.grid-programa .kb{width:26px;height:26px;display:block;color:var(--naranja)}
+.grid-programa .kb svg{width:100%;height:100%;fill:currentColor}
+
+/* el tiempo verbal cambia con la fase del evento */
+.fase-pasado .solo-antes{display:none}
+.solo-pasado{display:none}
+.fase-pasado .solo-pasado{display:inline}
