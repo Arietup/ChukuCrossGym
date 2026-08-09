@@ -157,4 +157,13 @@
   } else {
     setInterval(tick, 60000);
   }
+
+  // --- redes: un enlace vacío se oculta en vez de apuntar a la nada ---
+  document.querySelectorAll('[data-social]').forEach(function (a) {
+    const url = CONFIG[a.getAttribute('data-social')];
+    if (!url) { a.remove(); return; }
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
 })();
