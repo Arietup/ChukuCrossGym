@@ -6,8 +6,6 @@
     igGym:    'https://www.instagram.com/chukucross/',
     igCoach:  'https://www.instagram.com/anthonyfit20/',
     tiktok:   '',
-    correo:   'anthony_1908@yahoo.com',
-    horario:  { semana: 'Lun a Vie · 7:00–12:00 y 16:00–21:00', sabado: 'Sáb · 8:00–12:00' },
     evento:   { inicio: '2026-08-09T10:00:00-05:00', duracionHoras: 12 }
   };
   window.CHUKU = CONFIG;
@@ -197,15 +195,7 @@
     });
   }
 
-  // --- datos que salen de CONFIG ---
-  const hs = document.getElementById('horario-semana');
-  const hsab = document.getElementById('horario-sabado');
-  if (hs) hs.textContent = CONFIG.horario.semana;
-  if (hsab) hsab.textContent = CONFIG.horario.sabado;
-
-  const correo = document.getElementById('correo');
-  if (correo) { correo.textContent = CONFIG.correo; correo.href = 'mailto:' + CONFIG.correo; }
-
+  // --- año del pie ---
   const anio = document.getElementById('anio');
   if (anio) anio.textContent = String(new Date().getFullYear());
 })();
