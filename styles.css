@@ -40,7 +40,7 @@ a{color:inherit}
 .nav__in{height:100%;display:flex;align-items:center;justify-content:space-between;
   width:min(1220px,92vw);margin-inline:auto;gap:20px}
 .nav__logo{display:flex;align-items:center;gap:11px;text-decoration:none}
-.nav__logo img{border-radius:3px}
+.nav__logo img{height:auto}
 .nav__logo span{display:flex;flex-direction:column;line-height:1}
 .nav__logo b{font-family:var(--display);font-weight:900;font-size:1.12rem;letter-spacing:.01em}
 .nav__logo i{font-family:var(--dato);font-style:normal;font-size:.56rem;
@@ -211,7 +211,7 @@ a{color:inherit}
 .pie{background:var(--carbon);border-top:1px solid rgba(239,233,222,.14);padding:56px 0 26px}
 .pie__in{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px}
 .pie__marca{display:flex;gap:14px;align-items:flex-start}
-.pie__marca img{width:62px;height:62px;border-radius:4px}
+.pie__marca img{width:62px;height:auto}
 .pie h4{font-family:var(--dato);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--gris);margin:0 0 14px;font-weight:400}
 .pie a{color:var(--hueso);text-decoration:none;display:block;padding:5px 0;font-size:.9rem}
