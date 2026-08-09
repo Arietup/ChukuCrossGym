@@ -2,7 +2,7 @@
   --naranja:#E4411F; --brasa:#B32C10;
   --carbon:#0E0D0C; --carbon-2:#2A2724;
   --hueso:#EFE9DE; --hueso-2:#FBF8F3;
-  --piedra:#C9C0B2; --gris:#8A8378;
+  --piedra:#C9C0B2; --gris:#8A8378; --tinta:#5A534B;
   --display:'Big Shoulders Display',Impact,'Arial Narrow',sans-serif;
   --texto:'Archivo',system-ui,sans-serif;
   --dato:'Space Mono',ui-monospace,monospace;
@@ -64,7 +64,7 @@ a{color:inherit}
 .panel--gym{background:var(--carbon-2)}
 .panel--gym .panel__title span{color:var(--naranja)}
 .panel--coach{background:var(--hueso);color:var(--carbon)}
-.panel--coach .panel__lead{color:#5a534b}
+.panel--coach .panel__lead{color:var(--tinta)}
 .panel--coach .panel__eyebrow{color:var(--brasa)}
 
 .panel__bg{position:absolute;inset:0;z-index:1}
