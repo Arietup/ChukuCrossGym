@@ -877,7 +877,7 @@ Deshacer con `document.body.classList.remove('fase-pasado')`.
   font-family:var(--display);font-weight:700;font-size:1.7rem;line-height:1.08;
   text-transform:none;letter-spacing:0}
 .cita cite{display:block;font-family:var(--dato);font-size:.62rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--gris);font-style:normal;margin-top:14px}
+  text-transform:uppercase;color:var(--tinta);font-style:normal;margin-top:14px}
 
 .redes{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
 .chip{font-family:var(--dato);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
@@ -890,13 +890,13 @@ Deshacer con `document.body.classList.remove('fase-pasado')`.
   padding:34px 28px 30px;display:flex;flex-direction:column}
 .plan--destacado{background:var(--blanco);color:var(--carbon);border-color:var(--blanco)}
 .plan__flag{font-family:var(--dato);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;
-  background:var(--carbon);color:var(--blanco);padding:5px 10px;align-self:flex-start;margin-bottom:14px}
+  background:var(--carbon);color:var(--hueso);padding:5px 10px;align-self:flex-start;margin-bottom:14px}
 .plan h3{font-family:var(--display);font-weight:900;text-transform:uppercase;
   font-size:2.2rem;margin:0 0 8px;line-height:.9}
 .plan ul{list-style:none;padding:0;margin:16px 0 26px;flex:1}
 .plan li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.18);font-size:.92rem}
 .plan--destacado li{border-color:rgba(14,13,12,.12)}
-.plan li::before{content:'✓';color:var(--naranja);font-weight:700;margin-right:10px}
+.plan li::before{content:'✓';color:var(--blanco);font-weight:700;margin-right:10px}
 .plan--destacado li::before{color:var(--brasa)}
 .planes__nota{font-family:var(--dato);font-size:.62rem;letter-spacing:.1em;
   color:rgba(255,255,255,.75);margin-top:22px;text-transform:uppercase}

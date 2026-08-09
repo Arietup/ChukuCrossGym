@@ -359,8 +359,11 @@ Navegación: barra fija con logo; menú hamburguesa a pantalla completa bajo 900
   La granularidad sube conforme se acerca la hora: minutos en la última hora, que es cuando el dato
   importa. La función que arma esa frase es pura y vive en `logic.js` con su prueba.
 - `alt` descriptivo real en cada foto; el mapa embebido lleva `title`.
-- Contraste mínimo AA: texto sobre bermellón siempre blanco puro; `--gris` verificado sobre carbón
-  y sobre hueso.
+- Contraste mínimo AA: texto sobre bermellón siempre blanco puro. `--gris` solo sobre carbón —
+  sobre hueso da 3.10:1 y no cumple, ahí va `--tinta`.
+- **Cada enlace debe distinguirse leído fuera de contexto.** Un lector de pantalla puede listar los
+  enlaces de la página sin el texto que los rodea; tres botones que dicen solo «Consultar» son
+  indistinguibles ahí. Los CTA que se repiten llevan `aria-label` nombrando su plan.
 - Fotos con `loading="lazy"`. Si una falta, el marco conserva su etiqueta estilizada en vez de
   mostrar el ícono roto del navegador.
 - El contenido revelado por scroll debe ser visible si el JS falla (los estilos de revelado se
