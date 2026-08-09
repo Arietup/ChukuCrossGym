@@ -50,3 +50,39 @@ a{color:inherit}
 .nav__links a:not(.btn):hover{color:var(--naranja)}
 .burger{display:none;background:none;border:0;padding:10px;cursor:pointer}
 .burger span{display:block;width:24px;height:2px;background:var(--hueso);margin:5px 0}
+
+.actos{scroll-snap-type:y proximity;position:relative}
+.panel{position:relative;min-height:100vh;display:flex;align-items:center;
+  scroll-snap-align:start;overflow:hidden;padding:calc(var(--nav-h) + 40px) 0 60px}
+.panel__in{position:relative;z-index:2;width:min(1220px,92vw);margin-inline:auto}
+.panel__eyebrow{color:var(--naranja);margin:0 0 18px}
+.panel__title{font-size:clamp(3.4rem,11vw,9rem)}
+.panel__title span{color:var(--naranja)}
+.panel__lead{font-size:clamp(1rem,1.5vw,1.18rem);max-width:46ch;color:var(--piedra);margin:26px 0 0}
+
+.panel--evento{background:var(--carbon)}
+.panel--gym{background:var(--carbon-2)}
+.panel--gym .panel__title span{color:var(--naranja)}
+.panel--coach{background:var(--hueso);color:var(--carbon)}
+.panel--coach .panel__lead{color:#5a534b}
+.panel--coach .panel__eyebrow{color:var(--brasa)}
+
+.panel__bg{position:absolute;inset:0;z-index:1}
+.panel__bg img{width:100%;height:100%;object-fit:cover;opacity:.34}
+.panel__bg::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(14,13,12,.92) 0%,rgba(14,13,12,.55) 60%,rgba(14,13,12,.2) 100%)}
+
+/* marca de agua del león: se activa solo si existe assets/leon.png (Task 10) */
+.panel__marca{position:absolute;right:-4vw;bottom:-6vh;width:min(52vw,620px);aspect-ratio:1;
+  background:url('assets/leon.png') center/contain no-repeat;opacity:.06;z-index:1}
+
+.contador{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:40;
+  list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;
+  transition:opacity .3s}
+.contador li b{font-family:var(--dato);font-size:.66rem;color:var(--gris);
+  display:block;padding-right:20px;position:relative;transition:color .25s}
+.contador li b::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:12px;height:2px;background:var(--gris);transition:width .25s,background .25s,height .25s}
+.contador li.on b{color:var(--naranja)}
+.contador li.on b::after{width:20px;height:3px;background:var(--naranja)}
+.contador.oculto{opacity:0;pointer-events:none}

@@ -42,7 +42,42 @@
 </header>
 
 <main id="top">
-  <div id="actos"></div>
+  <div class="actos" id="actos">
+
+    <ol class="contador" id="contador" aria-hidden="true">
+      <li data-i="1"><b>01</b></li>
+      <li data-i="2"><b>02</b></li>
+      <li data-i="3"><b>03</b></li>
+    </ol>
+
+    <section class="panel panel--evento" id="evento" data-acto="1">
+      <div class="panel__in">
+        <p class="mono panel__eyebrow" id="evento-eyebrow">El Triunfo · 09.08.2026</p>
+        <h1 class="display panel__title" id="evento-title">Conversatorio<br><span>de culturismo</span></h1>
+        <p class="panel__lead" id="evento-lead">Posing, categorías, invitados nacionales y marcas presentes. Entrada libre.</p>
+        <div id="evento-slot"></div>
+      </div>
+    </section>
+
+    <section class="panel panel--gym" id="gym" data-acto="2">
+      <div class="panel__bg"><img src="assets/gym-01.jpg" alt="Interior del Chuku Cross Gym" loading="lazy"></div>
+      <div class="panel__in">
+        <p class="mono panel__eyebrow">El lugar</p>
+        <h2 class="display panel__title">Fierro,<br>piso<br><span>y ganas</span></h2>
+        <p class="panel__lead">El gym del cantón. Aquí entrena el que compite y el que recién empieza, en el mismo piso.</p>
+      </div>
+    </section>
+
+    <section class="panel panel--coach" id="coach" data-acto="3">
+      <div class="panel__marca" aria-hidden="true"></div>
+      <div class="panel__in">
+        <p class="mono panel__eyebrow">Coach y fundador</p>
+        <h2 class="display panel__title">Anthony<br><span>Ramires</span></h2>
+        <p class="panel__lead">Fe como motor, disciplina como método y la juventud de El Triunfo como propósito.</p>
+      </div>
+    </section>
+
+  </div>
 </main>
 
 <script src="logic.js"></script>
