@@ -2,7 +2,7 @@
   --naranja:#E4411F; --brasa:#B32C10;
   --carbon:#0E0D0C; --carbon-2:#2A2724;
   --hueso:#EFE9DE; --hueso-2:#FBF8F3;
-  --piedra:#C9C0B2; --gris:#8A8378; --tinta:#5A534B;
+  --piedra:#C9C0B2; --gris:#8A8378; --tinta:#5A534B; --blanco:#FFFFFF;
   --display:'Big Shoulders Display',Impact,'Arial Narrow',sans-serif;
   --texto:'Archivo',system-ui,sans-serif;
   --dato:'Space Mono',ui-monospace,monospace;
@@ -109,12 +109,12 @@ a{color:inherit}
   color:rgba(239,233,222,.55);z-index:2}
 .banda__txt{padding:clamp(38px,6vw,84px)}
 .banda__txt h2{font-family:var(--display);font-weight:900;text-transform:uppercase;
-  line-height:.86;letter-spacing:-.012em;font-size:clamp(2.6rem,5.2vw,4.6rem);margin:14px 0 22px}
+  line-height:.95;padding-top:.08em;letter-spacing:-.012em;font-size:clamp(2.6rem,5.2vw,4.6rem);margin:14px 0 22px}
 .banda__txt p{max-width:52ch}
 .banda--oscura{background:var(--carbon)}
 .banda--clara{background:var(--hueso);color:var(--carbon)}
 .banda--clara p{color:var(--tinta)}
-.banda--naranja{background:var(--naranja);color:#fff}
+.banda--naranja{background:var(--naranja);color:var(--blanco)}
 .banda--naranja p{color:rgba(255,255,255,.9)}
 .banda--naranja .mono{color:rgba(255,255,255,.8)}
 
@@ -122,13 +122,13 @@ a{color:inherit}
 .seccion--clara{background:var(--hueso);color:var(--carbon)}
 .seccion__head{margin-bottom:52px}
 .seccion__head h2{font-family:var(--display);font-weight:900;text-transform:uppercase;
-  line-height:.86;font-size:clamp(2.6rem,6vw,5.2rem);margin:14px 0 0}
+  line-height:.95;padding-top:.08em;font-size:clamp(2.6rem,6vw,5.2rem);margin:14px 0 0}
 
 .grid-programa{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;
   background:var(--piedra)}
 .grid-programa article{background:var(--hueso);padding:34px 30px 38px}
 .grid-programa h3{font-family:var(--display);font-weight:800;text-transform:uppercase;
-  font-size:1.85rem;line-height:.9;margin:16px 0 12px}
+  font-size:1.85rem;line-height:.9;padding-top:.08em;margin:16px 0 12px}
 .grid-programa p{color:var(--tinta);font-size:.95rem;margin:0}
 .grid-programa .kb{width:26px;height:26px;display:block;color:var(--naranja)}
 .grid-programa .kb svg{width:100%;height:100%;fill:currentColor}
