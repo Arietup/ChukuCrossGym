@@ -91,9 +91,24 @@ Muestreado píxel a píxel del logo, no elegido a criterio:
 --hueso:    #EFE9DE;  /* claro cálido, superficie principal clara */
 --hueso-2:  #FBF8F3;  /* claro más alto */
 --piedra:   #C9C0B2;  /* bordes y separadores sobre claro */
---gris:     #8A8378;  /* texto secundario, legible sobre ambos fondos */
+--gris:     #8A8378;  /* texto secundario SOBRE OSCURO */
+--tinta:    #5A534B;  /* texto secundario SOBRE CLARO */
 --blanco:   #FFFFFF;  /* solo texto sobre bermellón y sobre foto */
 ```
+
+**`--gris` y `--tinta` no son intercambiables.** Son el mismo rol tipográfico en dos fondos, y la
+razón es de contraste medido, no de gusto:
+
+| Combinación | Contraste | AA (4.5:1) |
+|---|---|---|
+| `--gris` sobre `--carbon` | 6.9:1 | ✓ |
+| `--gris` sobre `--hueso` | 3.10:1 | ✗ |
+| `--tinta` sobre `--hueso` | 6.27:1 | ✓ |
+
+Usar `--gris` para texto secundario sobre fondo claro deja el párrafo por debajo del mínimo
+accesible — se desvanece en un celular a pleno sol, que es exactamente el contexto de uso en
+El Triunfo. Ningún color se escribe a mano en el CSS: todo es `var(--token)`, salvo `rgba()` de
+`--carbon` y `--hueso` cuando hace falta transparencia.
 
 Los neutros están tintados hacia el **cálido** a propósito. Es la oposición directa a los grises
 fríos de Taurus, y es lo que permite que convivan con el bermellón sin vibrar.

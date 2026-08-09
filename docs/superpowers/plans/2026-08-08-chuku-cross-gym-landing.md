@@ -15,7 +15,9 @@
 - Idioma de toda la interfaz: español ecuatoriano. Sentence case en párrafos, mayúsculas solo en display y etiquetas mono.
 - Marca escrita siempre **Chuku Cross Gym** (nunca "Churu", nunca "Chuku Cross" a secas en texto corrido).
 - Un solo número de WhatsApp en toda la página: `593995128564`. Los CTAs cambian el mensaje, jamás el destino.
-- Paleta exacta: `--naranja #E4411F`, `--brasa #B32C10`, `--carbon #0E0D0C`, `--carbon-2 #2A2724`, `--hueso #EFE9DE`, `--hueso-2 #FBF8F3`, `--piedra #C9C0B2`, `--gris #8A8378`.
+- Paleta exacta, **nueve tokens**: `--naranja #E4411F`, `--brasa #B32C10`, `--carbon #0E0D0C`, `--carbon-2 #2A2724`, `--hueso #EFE9DE`, `--hueso-2 #FBF8F3`, `--piedra #C9C0B2`, `--gris #8A8378`, `--tinta #5A534B`.
+- **Ningún color a mano.** Todo color se escribe `var(--token)`. Única excepción permitida: `rgba(14,13,12,α)` y `rgba(239,233,222,α)` cuando se necesita transparencia, porque `var()` no transporta alfa — son `--carbon` y `--hueso` con opacidad, no colores nuevos.
+- `--gris` es texto secundario **sobre oscuro**; `--tinta` es texto secundario **sobre claro**. No intercambiarlos: `--gris` sobre `--hueso` da 3.10:1 y falla AA; `--tinta` da 6.27:1 y pasa.
 - Tipografía: Big Shoulders Display 900 (display), Archivo 400/600 (lectura), Space Mono 400/700 (datos).
 - Fecha del evento: `2026-08-09T10:00:00-05:00`. Duración 12 h.
 - Horario publicado: `Lun a Vie · 7:00–12:00 y 16:00–21:00` y `Sáb · 8:00–12:00`. **No publicar nada sobre el domingo.**
@@ -332,7 +334,7 @@ Run: `grep -nE 'document|window|navigator' logic.js` → Expected: sin resultado
   --naranja:#E4411F; --brasa:#B32C10;
   --carbon:#0E0D0C; --carbon-2:#2A2724;
   --hueso:#EFE9DE; --hueso-2:#FBF8F3;
-  --piedra:#C9C0B2; --gris:#8A8378;
+  --piedra:#C9C0B2; --gris:#8A8378; --tinta:#5A534B;
   --display:'Big Shoulders Display',Impact,'Arial Narrow',sans-serif;
   --texto:'Archivo',system-ui,sans-serif;
   --dato:'Space Mono',ui-monospace,monospace;
@@ -462,7 +464,7 @@ En `index.html`, sustituir `<div id="actos"></div>` por:
 .panel--gym{background:var(--carbon-2)}
 .panel--gym .panel__title span{color:var(--naranja)}
 .panel--coach{background:var(--hueso);color:var(--carbon)}
-.panel--coach .panel__lead{color:#5a534b}
+.panel--coach .panel__lead{color:var(--tinta)}
 .panel--coach .panel__eyebrow{color:var(--brasa)}
 
 .panel__bg{position:absolute;inset:0;z-index:1}
@@ -737,7 +739,7 @@ Expected: `✓ estadoEvento` y `✓ mensajeWhatsApp`
 .banda__txt p{max-width:52ch}
 .banda--oscura{background:var(--carbon)}
 .banda--clara{background:var(--hueso);color:var(--carbon)}
-.banda--clara p{color:#5a534b}
+.banda--clara p{color:var(--tinta)}
 .banda--naranja{background:var(--naranja);color:#fff}
 .banda--naranja p{color:rgba(255,255,255,.9)}
 .banda--naranja .mono{color:rgba(255,255,255,.8)}
@@ -753,7 +755,7 @@ Expected: `✓ estadoEvento` y `✓ mensajeWhatsApp`
 .grid-programa article{background:var(--hueso);padding:34px 30px 38px}
 .grid-programa h3{font-family:var(--display);font-weight:800;text-transform:uppercase;
   font-size:1.85rem;line-height:.9;margin:16px 0 12px}
-.grid-programa p{color:#5a534b;font-size:.95rem;margin:0}
+.grid-programa p{color:var(--tinta);font-size:.95rem;margin:0}
 .grid-programa .kb{width:26px;height:26px;display:block;color:var(--naranja)}
 .grid-programa .kb svg{width:100%;height:100%;fill:currentColor}
 
