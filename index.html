@@ -9,7 +9,9 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Conversatorio de Culturismo · Chuku Cross Gym">
 <meta property="og:description" content="09 de agosto de 2026 · El Triunfo. Posing, categorías, invitados nacionales y marcas.">
+<!-- Completar con el dominio final: og:image y og:url necesitan URL absoluta para que WhatsApp muestre la vista previa -->
 <meta property="og:image" content="assets/logo.jpg">
+<meta property="og:url" content="">
 <meta property="og:locale" content="es_EC">
 <link rel="icon" href="assets/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +22,8 @@
 <body>
 
 <a class="skip" href="#actos">Saltar al contenido</a>
+
+<!-- data-wa href: URL real de WhatsApp escrita en el HTML como respaldo si app.js no carga; app.js la sobrescribe con el mismo valor a partir de CONFIG -->
 
 <header class="nav">
   <div class="nav__in">
@@ -33,7 +37,7 @@
       <a href="#coach">Coach</a>
       <a href="#planes">Membresías</a>
       <a href="#contacto">Contacto</a>
-      <a class="btn btn--naranja btn--sm" href="#" data-wa data-wa-msg="Hola, quiero información del Chuku Cross Gym.">WhatsApp</a>
+      <a class="btn btn--naranja btn--sm" href="https://wa.me/593995128564?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Chuku%20Cross%20Gym." data-wa data-wa-msg="Hola, quiero información del Chuku Cross Gym.">WhatsApp</a>
     </nav>
     <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
       <span></span><span></span><span></span>
@@ -42,7 +46,7 @@
 </header>
 
 <main id="top">
-  <div class="actos" id="actos">
+  <div class="actos" id="actos" tabindex="-1">
 
     <ol class="contador" id="contador" aria-hidden="true">
       <li data-i="1"><b>01</b></li>
@@ -60,7 +64,7 @@
     </section>
 
     <section class="panel panel--gym" id="gym" data-acto="2">
-      <div class="panel__bg"><img src="assets/gym-01.jpg" alt="Interior del Chuku Cross Gym" loading="lazy"></div>
+      <div class="panel__bg"><img src="assets/gym-hero.jpg" alt="Interior del Chuku Cross Gym" loading="lazy"></div>
       <div class="panel__in">
         <p class="mono panel__eyebrow">El lugar</p>
         <h2 class="display panel__title">Fierro,<br>piso<br><span>y ganas</span></h2>
@@ -73,7 +77,7 @@
       <div class="panel__in">
         <p class="mono panel__eyebrow">Coach y fundador</p>
         <h2 class="display panel__title">Anthony<br><span>Ramires</span></h2>
-        <p class="panel__lead">Fe como motor, disciplina como método y la juventud de El Triunfo como propósito.</p>
+        <p class="panel__lead">Construyó este gym con la fe por delante y con los chicos del cantón en la cabeza.</p>
       </div>
     </section>
 
@@ -119,7 +123,7 @@
 
   <section class="banda banda--oscura">
     <div class="banda__foto" data-etiqueta="Invitados nacionales">
-      <img src="assets/gym-02.jpg" alt="Atletas entrenando en el Chuku Cross Gym" loading="lazy">
+      <img src="assets/gym-invitados.jpg" alt="Atletas entrenando en el Chuku Cross Gym" loading="lazy">
     </div>
     <div class="banda__txt">
       <p class="mono" style="color:var(--naranja)">Quiénes acompañan</p>
@@ -127,7 +131,7 @@
       <p>Atletas y preparadores con recorrido en tarima ecuatoriana acompañan la jornada, responden preguntas y corrigen posing en vivo. La nómina se publica en nuestras redes.</p>
       <p>Marcas de suplementación, indumentaria y accesorios estarán presentes con stands y muestras durante todo el evento.</p>
       <p style="margin-top:26px">
-        <a class="btn btn--naranja" href="#" data-wa data-wa-msg="Hola, represento a una marca y quiero estar presente en el evento del 9 de agosto.">Quiero llevar mi marca</a>
+        <a class="btn btn--naranja" href="https://wa.me/593995128564?text=Hola%2C%20represento%20a%20una%20marca%20y%20quiero%20estar%20presente%20en%20el%20evento%20del%209%20de%20agosto." data-wa data-wa-msg="Hola, represento a una marca y quiero estar presente en el evento del 9 de agosto.">Quiero llevar mi marca</a>
       </p>
     </div>
   </section>
@@ -165,14 +169,15 @@
       <h2>Lo que se<br>levanta aquí<br>empieza en<br>la fe</h2>
       <p>Anthony Ramires construyó el Chuku Cross Gym con Dios como motor y una idea simple: la disciplina que se aprende cargando un disco sirve para todo lo demás.</p>
       <p>Su trabajo va más allá de la rutina. Formar juventud en El Triunfo es la razón del proyecto: darle a los chicos del cantón un lugar donde llegar después del colegio, una meta que perseguir y gente que les exija en serio. Aquí no se entrena solo el cuerpo; se enseña puntualidad, respeto y palabra cumplida.</p>
-      <p>Por eso el gym impulsa el deporte local, abre sus puertas a eventos como el conversatorio del 9 de agosto y acompaña a quien quiere competir. Si vienes por salud, por estética o por tarima, el trato es el mismo: se te enseña, se te corrige y se te acompaña.</p>
+      <p>Por eso el gym impulsa el deporte local, abre sus puertas a eventos como el conversatorio del 9 de agosto y acompaña a quien quiere competir. Si vienes por salud, por estética o por tarima, el trato es el mismo: te enseñamos, te corregimos y te acompañamos.</p>
 
       <blockquote class="cita">Un atleta no se construye en el escenario. Se construye los días que nadie te ve entrenar.<cite>Anthony Ramires</cite></blockquote>
 
       <div class="redes" id="coach-redes">
-        <a class="btn btn--naranja" href="#" data-wa data-wa-msg="Hola coach, quiero asesoría en el Chuku Cross Gym.">WhatsApp del coach</a>
-        <a class="chip" data-social="igCoach" href="#">Instagram del coach</a>
-        <a class="chip" data-social="igGym" href="#">Instagram del gym</a>
+        <a class="btn btn--naranja" href="https://wa.me/593995128564?text=Hola%20coach%2C%20quiero%20asesor%C3%ADa%20en%20el%20Chuku%20Cross%20Gym." data-wa data-wa-msg="Hola coach, quiero asesoría en el Chuku Cross Gym.">WhatsApp del coach</a>
+        <a class="chip" data-social="igCoach" href="https://www.instagram.com/anthonyfit20/">Instagram del coach</a>
+        <a class="chip" data-social="igGym" href="https://www.instagram.com/chukucross/">Instagram del gym</a>
+        <!-- data-social="tiktok": se elimina en tiempo de ejecución (app.js) porque CONFIG.tiktok está vacío hasta que el dueño entregue la cuenta -->
         <a class="chip" data-social="tiktok" href="#">TikTok</a>
       </div>
     </div>
@@ -181,7 +186,7 @@
   <section class="seccion seccion--naranja" id="planes">
     <div class="wrap">
       <header class="seccion__head">
-        <p class="mono" style="color:rgba(255,255,255,.85)">Membresías</p>
+        <p class="mono" style="color:var(--carbon)">Membresías</p>
         <h2>Entrena<br>desde hoy</h2>
       </header>
 
@@ -189,18 +194,18 @@
         <article class="plan">
           <h3>Diario</h3>
           <ul><li>Acceso completo al gym</li><li>Sin compromiso</li><li>Ideal si estás de paso</li></ul>
-          <a class="btn btn--hueso" href="#" data-wa data-wa-msg="Hola, quiero saber el valor del pase diario." aria-label="Consultar sobre el plan diario">Consultar</a>
+          <a class="btn btn--hueso" href="https://wa.me/593995128564?text=Hola%2C%20quiero%20saber%20el%20valor%20del%20pase%20diario." data-wa data-wa-msg="Hola, quiero saber el valor del pase diario." aria-label="Consultar sobre el plan diario">Consultar</a>
         </article>
         <article class="plan plan--destacado">
-          <span class="plan__flag">El más tomado</span>
+          <span class="plan__flag">El más pedido</span>
           <h3>Mensual</h3>
           <ul><li>Acceso completo al gym</li><li>Rutina armada por el coach</li><li>Seguimiento de tu progreso</li></ul>
-          <a class="btn btn--naranja" href="#" data-wa data-wa-msg="Hola, quiero saber el valor de la membresía mensual." aria-label="Consultar sobre la membresía mensual">Consultar</a>
+          <a class="btn btn--naranja" href="https://wa.me/593995128564?text=Hola%2C%20quiero%20saber%20el%20valor%20de%20la%20membres%C3%ADa%20mensual." data-wa data-wa-msg="Hola, quiero saber el valor de la membresía mensual." aria-label="Consultar sobre la membresía mensual">Consultar</a>
         </article>
         <article class="plan">
           <h3>Trimestral</h3>
-          <ul><li>Todo lo del plan mensual</li><li>Plan de temporada con el coach</li><li>Mejor valor por mes</li></ul>
-          <a class="btn btn--hueso" href="#" data-wa data-wa-msg="Hola, quiero saber el valor de la membresía trimestral." aria-label="Consultar sobre la membresía trimestral">Consultar</a>
+          <ul><li>Todo lo del plan mensual</li><li>Plan de temporada con el coach</li><li>Te sale mejor que pagar mes a mes</li></ul>
+          <a class="btn btn--hueso" href="https://wa.me/593995128564?text=Hola%2C%20quiero%20saber%20el%20valor%20de%20la%20membres%C3%ADa%20trimestral." data-wa data-wa-msg="Hola, quiero saber el valor de la membresía trimestral." aria-label="Consultar sobre la membresía trimestral">Consultar</a>
         </article>
       </div>
       <p class="planes__nota">Los valores se confirman por WhatsApp · promociones vigentes cada mes</p>
@@ -261,7 +266,7 @@
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a class="btn btn--naranja" target="_blank" rel="noopener"
            href="https://www.google.com/maps/search/?api=1&query=Cdla.%20Jaime%20Rold%C3%B3s%2C%20Muro%20de%20Berl%C3%ADn%2C%20El%20Triunfo%2C%20Guayas%2C%20Ecuador">Abrir en Maps</a>
-        <a class="btn btn--hueso" href="#" data-wa data-wa-msg="Hola, ¿me pasan la ubicación exacta del gym?">Pedir ubicación</a>
+        <a class="btn btn--hueso" href="https://wa.me/593995128564?text=Hola%2C%20%C2%BFme%20pasan%20la%20ubicaci%C3%B3n%20exacta%20del%20gym%3F" data-wa data-wa-msg="Hola, ¿me pasan la ubicación exacta del gym?">Pedir ubicación</a>
       </div>
     </div>
     <div class="loc__map">
@@ -284,7 +289,7 @@
       </div>
     </div>
     <nav class="pie__col" aria-label="Secciones de la página">
-      <h4>La web</h4>
+      <h3>La web</h3>
       <a href="#evento">Evento 09.08.2026</a>
       <a href="#gym-dentro">El gym</a>
       <a href="#nosotros">Quiénes somos</a>
@@ -292,17 +297,18 @@
       <a href="#contacto">Contacto</a>
     </nav>
     <nav class="pie__col" aria-label="Redes sociales">
-      <h4>Síguenos</h4>
-      <a data-social="igGym" href="#">Instagram del gym</a>
-      <a data-social="igCoach" href="#">Instagram del coach</a>
+      <h3>Síguenos</h3>
+      <a data-social="igGym" href="https://www.instagram.com/chukucross/">Instagram del gym</a>
+      <a data-social="igCoach" href="https://www.instagram.com/anthonyfit20/">Instagram del coach</a>
+      <!-- data-social="tiktok": se elimina en tiempo de ejecución (app.js) porque CONFIG.tiktok está vacío hasta que el dueño entregue la cuenta -->
       <a data-social="tiktok" href="#">TikTok</a>
-      <a href="#" data-wa data-wa-msg="Hola, quiero información del Chuku Cross Gym.">WhatsApp</a>
+      <a href="https://wa.me/593995128564?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Chuku%20Cross%20Gym." data-wa data-wa-msg="Hola, quiero información del Chuku Cross Gym.">WhatsApp</a>
     </nav>
   </div>
   <p class="pie__legal">© <span id="anio">2026</span> Chuku Cross Gym · Coach Anthony Ramires</p>
 </footer>
 
-<a class="flota" href="#" data-wa data-wa-msg="Hola, quiero información del Chuku Cross Gym." aria-label="Escribir por WhatsApp">
+<a class="flota" href="https://wa.me/593995128564?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Chuku%20Cross%20Gym." data-wa data-wa-msg="Hola, quiero información del Chuku Cross Gym." aria-label="Escribir por WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-1.99 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.24-1.65-1.24-3.15s.79-2.24 1.07-2.55c.28-.31.61-.38.81-.38h.58c.19 0 .44-.07.69.53.25.6.86 2.1.94 2.25.08.15.13.33.02.53-.1.2-.15.33-.3.5-.15.18-.32.39-.45.53-.15.15-.31.31-.13.61.18.3.79 1.3 1.69 2.11 1.16 1.03 2.14 1.35 2.44 1.5.3.15.48.13.66-.08.18-.2.76-.89.96-1.19.2-.3.4-.25.68-.15.28.1 1.77.83 2.07.99.3.15.5.22.58.35.07.13.07.74-.18 1.43Z"/></svg>
   <span>Escríbenos</span>
 </a>

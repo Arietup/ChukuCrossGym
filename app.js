@@ -8,9 +8,6 @@
     tiktok:   '',
     evento:   { inicio: '2026-08-09T10:00:00-05:00', duracionHoras: 12 }
   };
-  window.CHUKU = CONFIG;
-
-  document.documentElement.classList.add('js');
 
   // --- enlaces de WhatsApp: mismo destino, distinto mensaje ---
   document.querySelectorAll('[data-wa]').forEach(function (a) {
@@ -33,6 +30,14 @@
       if (e.target.tagName === 'A') {
         menu.classList.remove('abierto');
         burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.classList.contains('abierto')) {
+        menu.classList.remove('abierto');
+        burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Abrir menú');
+        burger.focus();
       }
     });
   }
@@ -60,6 +65,55 @@
     }, { threshold: 0.1 });
     io2.observe(finActoI);
   }
+
+  // --- redes: un enlace vacío se oculta en vez de apuntar a la nada ---
+  document.querySelectorAll('[data-social]').forEach(function (a) {
+    const url = CONFIG[a.getAttribute('data-social')];
+    if (!url) { a.remove(); return; }
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
+  // --- formulario: compone el mensaje y abre WhatsApp ---
+  const form = document.getElementById('form-wa');
+  if (form) {
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+
+      const campos = {
+        nombre: document.getElementById('campo-nombre'),
+        texto:  document.getElementById('campo-texto')
+      };
+      Object.keys(campos).forEach(function (k) { campos[k].classList.remove('campo--malo'); });
+      document.getElementById('err-nombre').textContent = '';
+      document.getElementById('err-texto').textContent = '';
+
+      const r = mensajeWhatsApp(CONFIG.whatsapp, {
+        nombre:  document.getElementById('f-nombre').value,
+        interes: document.getElementById('f-interes').value,
+        texto:   document.getElementById('f-texto').value
+      });
+
+      if (!r.ok) {
+        campos[r.campo].classList.add('campo--malo');
+        document.getElementById('err-' + r.campo).textContent = r.error;
+        document.getElementById('f-' + r.campo).focus();
+        return;
+      }
+      window.open(r.url, '_blank', 'noopener');
+    });
+  }
+
+  // --- año del pie ---
+  const anio = document.getElementById('anio');
+  if (anio) anio.textContent = String(new Date().getFullYear());
+
+  // --- si una foto no existe, se quita y queda el marco con su etiqueta ---
+  document.querySelectorAll('.banda__foto img, .galeria img, .panel__bg img').forEach(function (img) {
+    img.addEventListener('error', function () { img.remove(); });
+    if (img.complete && !img.naturalWidth) img.remove();
+  });
 
   // --- panel 01: cambia solo según la fecha ---
   const TEXTOS = {
@@ -91,6 +145,7 @@
   const elLead    = document.getElementById('evento-lead');
   const elSlot    = document.getElementById('evento-slot');
   let faseActual = null;
+  let intervaloCuenta = null;
 
   function pintarCuenta(e) {
     elSlot.innerHTML =
@@ -144,63 +199,25 @@
       a.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(a.getAttribute('data-wa-msg'));
       a.target = '_blank'; a.rel = 'noopener';
     });
+
+    // la cuenta regresiva ya no aplica fuera de la fase 'antes': se detiene el intervalo
+    if (e.fase !== 'antes' && intervaloCuenta !== null) {
+      clearInterval(intervaloCuenta);
+      intervaloCuenta = null;
+    }
   }
 
   function tick() {
     aplicarFase(estadoEvento(CONFIG.evento.inicio, new Date(), CONFIG.evento.duracionHoras));
   }
   tick();
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    setInterval(tick, 1000);
-  } else {
-    setInterval(tick, 60000);
+  // solo se arranca el intervalo si hace falta cuenta regresiva; aplicarFase lo limpia
+  // apenas la fase deja de ser 'antes', así nunca sigue corriendo de fondo sin motivo
+  if (faseActual === 'antes') {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      intervaloCuenta = setInterval(tick, 1000);
+    } else {
+      intervaloCuenta = setInterval(tick, 60000);
+    }
   }
-
-  // --- redes: un enlace vacío se oculta en vez de apuntar a la nada ---
-  document.querySelectorAll('[data-social]').forEach(function (a) {
-    const url = CONFIG[a.getAttribute('data-social')];
-    if (!url) { a.remove(); return; }
-    a.href = url;
-    a.target = '_blank';
-    a.rel = 'noopener';
-  });
-
-  // --- formulario: compone el mensaje y abre WhatsApp ---
-  const form = document.getElementById('form-wa');
-  if (form) {
-    form.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-
-      const campos = {
-        nombre: document.getElementById('campo-nombre'),
-        texto:  document.getElementById('campo-texto')
-      };
-      Object.keys(campos).forEach(function (k) { campos[k].classList.remove('campo--malo'); });
-      document.getElementById('err-nombre').textContent = '';
-      document.getElementById('err-texto').textContent = '';
-
-      const r = mensajeWhatsApp(CONFIG.whatsapp, {
-        nombre:  document.getElementById('f-nombre').value,
-        interes: document.getElementById('f-interes').value,
-        texto:   document.getElementById('f-texto').value
-      });
-
-      if (!r.ok) {
-        campos[r.campo].classList.add('campo--malo');
-        document.getElementById('err-' + r.campo).textContent = r.error;
-        document.getElementById('f-' + r.campo).focus();
-        return;
-      }
-      window.open(r.url, '_blank', 'noopener');
-    });
-  }
-
-  // --- año del pie ---
-  const anio = document.getElementById('anio');
-  if (anio) anio.textContent = String(new Date().getFullYear());
-
-  // --- si una foto no existe, se quita y queda el marco con su etiqueta ---
-  document.querySelectorAll('.banda__foto img, .galeria img, .panel__bg img').forEach(function (img) {
-    img.addEventListener('error', function () { img.remove(); });
-  });
 })();
