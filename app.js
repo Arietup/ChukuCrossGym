@@ -166,4 +166,34 @@
     a.target = '_blank';
     a.rel = 'noopener';
   });
+
+  // --- formulario: compone el mensaje y abre WhatsApp ---
+  const form = document.getElementById('form-wa');
+  if (form) {
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+
+      const campos = {
+        nombre: document.getElementById('campo-nombre'),
+        texto:  document.getElementById('campo-texto')
+      };
+      Object.keys(campos).forEach(function (k) { campos[k].classList.remove('campo--malo'); });
+      document.getElementById('err-nombre').textContent = '';
+      document.getElementById('err-texto').textContent = '';
+
+      const r = mensajeWhatsApp(CONFIG.whatsapp, {
+        nombre:  document.getElementById('f-nombre').value,
+        interes: document.getElementById('f-interes').value,
+        texto:   document.getElementById('f-texto').value
+      });
+
+      if (!r.ok) {
+        campos[r.campo].classList.add('campo--malo');
+        document.getElementById('err-' + r.campo).textContent = r.error;
+        document.getElementById('f-' + r.campo).focus();
+        return;
+      }
+      window.open(r.url, '_blank', 'noopener');
+    });
+  }
 })();

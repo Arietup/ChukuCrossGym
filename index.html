@@ -207,6 +207,45 @@
     </div>
   </section>
 
+  <section class="seccion" id="contacto">
+    <div class="wrap" style="max-width:820px">
+      <header class="seccion__head">
+        <p class="mono" style="color:var(--naranja)">Escríbele al coach</p>
+        <h2>Empieza por<br>un mensaje</h2>
+        <p style="color:var(--piedra);margin-top:20px">Llena esto y se abre WhatsApp con tu mensaje ya escrito. No guardamos nada: va directo al chat.</p>
+      </header>
+
+      <form class="form" id="form-wa" novalidate>
+        <div class="campo" id="campo-nombre">
+          <label for="f-nombre">Tu nombre</label>
+          <input id="f-nombre" name="nombre" type="text" autocomplete="name" placeholder="Juan Pérez">
+          <span class="error" id="err-nombre" aria-live="polite"></span>
+        </div>
+
+        <div class="campo">
+          <label for="f-interes">Qué te interesa</label>
+          <select id="f-interes" name="interes">
+            <option value="Membresía">Membresía</option>
+            <option value="Asesoría personalizada">Asesoría personalizada</option>
+            <option value="Evento del 09/08">Evento del 09/08</option>
+            <option value="Otro">Otro</option>
+          </select>
+          <span class="error"></span>
+        </div>
+
+        <div class="campo campo--ancho" id="campo-texto">
+          <label for="f-texto">Tu mensaje</label>
+          <textarea id="f-texto" name="texto" placeholder="Quiero empezar el lunes, ¿hay cupo a las 7?"></textarea>
+          <span class="error" id="err-texto" aria-live="polite"></span>
+        </div>
+
+        <div class="campo--ancho">
+          <button class="btn btn--naranja" type="submit">Enviar por WhatsApp</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
 </main>
 
 <script src="logic.js"></script>

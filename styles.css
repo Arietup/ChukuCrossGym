@@ -182,3 +182,17 @@ a{color:inherit}
 .plan--destacado li::before{color:var(--brasa)}
 .planes__nota{font-family:var(--dato);font-size:.62rem;letter-spacing:.1em;
   color:rgba(255,255,255,.75);margin-top:22px;text-transform:uppercase}
+
+.form{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+.campo{display:flex;flex-direction:column;gap:8px}
+.campo--ancho{grid-column:1 / -1}
+.campo label{font-family:var(--dato);font-size:.62rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gris)}
+.campo input,.campo select,.campo textarea{font-family:var(--texto);font-size:1rem;
+  background:rgba(239,233,222,.06);border:1px solid rgba(239,233,222,.22);
+  color:var(--hueso);padding:15px 16px;width:100%}
+.campo textarea{resize:vertical;min-height:130px}
+.campo input:focus,.campo select:focus,.campo textarea:focus{border-color:var(--naranja);outline:none}
+.campo select option{background:var(--carbon);color:var(--hueso)}
+.campo .error{font-family:var(--texto);font-size:.82rem;color:var(--naranja);min-height:1.2em}
+.campo--malo input,.campo--malo textarea{border-color:var(--naranja)}
