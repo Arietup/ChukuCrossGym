@@ -198,4 +198,9 @@
   // --- año del pie ---
   const anio = document.getElementById('anio');
   if (anio) anio.textContent = String(new Date().getFullYear());
+
+  // --- si una foto no existe, se quita y queda el marco con su etiqueta ---
+  document.querySelectorAll('.banda__foto img, .galeria img, .panel__bg img').forEach(function (img) {
+    img.addEventListener('error', function () { img.remove(); });
+  });
 })();
