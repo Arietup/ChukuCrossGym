@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { estadoEvento } = require('./logic.js');
+const { estadoEvento, mensajeWhatsApp } = require('./logic.js');
 
 const INICIO = '2026-08-09T10:00:00-05:00';
 
@@ -42,3 +42,49 @@ assert.equal(estadoEvento(INICIO, new Date('2026-08-01T00:00:00-05:00')).fase, '
 assert.equal(estadoEvento(INICIO, Date.parse('2026-12-01T00:00:00-05:00')).fase, 'pasado');
 
 console.log('✓ estadoEvento');
+
+const NUM = '593995128564';
+
+// caso feliz completo
+let w = mensajeWhatsApp(NUM, { nombre: 'Juan Pérez', interes: 'Membresía mensual', texto: '¿Hay cupo el lunes?' });
+assert.equal(w.ok, true);
+assert.ok(w.url.startsWith('https://wa.me/593995128564?text='));
+
+// el mensaje decodificado tiene la forma acordada
+let decodificado = decodeURIComponent(w.url.split('?text=')[1]);
+assert.equal(
+  decodificado,
+  'Hola coach Anthony 👋\nSoy *Juan Pérez*.\nMe interesa: *Membresía mensual*\n\n¿Hay cupo el lunes?'
+);
+
+// acentos, ñ y signos van escapados en la URL, no crudos
+assert.ok(!w.url.includes('é'), 'los acentos deben ir codificados');
+assert.ok(w.url.includes('%0A'), 'los saltos de línea deben ir codificados');
+
+// interés vacío: se omite esa línea, no queda "Me interesa: **"
+w = mensajeWhatsApp(NUM, { nombre: 'Ana', interes: '', texto: 'Hola' });
+decodificado = decodeURIComponent(w.url.split('?text=')[1]);
+assert.equal(decodificado, 'Hola coach Anthony 👋\nSoy *Ana*.\n\nHola');
+
+// nombre faltante o solo espacios: no se abre WhatsApp
+for (const malo of ['', '   ', undefined]) {
+  const r2 = mensajeWhatsApp(NUM, { nombre: malo, interes: 'Otro', texto: 'Hola' });
+  assert.equal(r2.ok, false);
+  assert.equal(r2.campo, 'nombre');
+  assert.ok(r2.error.length > 0);
+}
+
+// mensaje faltante: no se abre WhatsApp
+for (const malo of ['', '  ', undefined]) {
+  const r3 = mensajeWhatsApp(NUM, { nombre: 'Ana', interes: 'Otro', texto: malo });
+  assert.equal(r3.ok, false);
+  assert.equal(r3.campo, 'texto');
+}
+
+// se recortan espacios sobrantes de los extremos
+w = mensajeWhatsApp(NUM, { nombre: '  Ana  ', interes: 'Otro', texto: '  Hola  ' });
+decodificado = decodeURIComponent(w.url.split('?text=')[1]);
+assert.ok(decodificado.includes('*Ana*'));
+assert.ok(decodificado.endsWith('Hola'));
+
+console.log('✓ mensajeWhatsApp');

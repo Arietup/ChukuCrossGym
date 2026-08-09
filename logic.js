@@ -16,4 +16,23 @@ function estadoEvento(inicioISO, ahora, duracionHoras = 12) {
   return { fase: 'antes', d, h, m, s };
 }
 
-if (typeof module !== 'undefined') module.exports = { estadoEvento };
+function mensajeWhatsApp(numero, datos) {
+  const nombre = String(datos && datos.nombre || '').trim();
+  const texto  = String(datos && datos.texto  || '').trim();
+  const interes = String(datos && datos.interes || '').trim();
+
+  if (!nombre) {
+    return { ok: false, campo: 'nombre', error: 'Escribe tu nombre para que el coach sepa quién eres' };
+  }
+  if (!texto) {
+    return { ok: false, campo: 'texto', error: 'Cuéntale al coach qué necesitas' };
+  }
+
+  const lineas = ['Hola coach Anthony 👋', `Soy *${nombre}*.`];
+  if (interes) lineas.push(`Me interesa: *${interes}*`);
+  lineas.push('', texto);
+
+  return { ok: true, url: `https://wa.me/${numero}?text=${encodeURIComponent(lineas.join('\n'))}` };
+}
+
+if (typeof module !== 'undefined') module.exports = { estadoEvento, mensajeWhatsApp };
