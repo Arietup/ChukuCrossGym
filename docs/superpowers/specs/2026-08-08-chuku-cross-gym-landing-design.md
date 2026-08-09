@@ -328,6 +328,20 @@ Navegación: barra fija con logo; menú hamburguesa a pantalla completa bajo 900
   la regresiva y en el contador de actos, que son los dos únicos lugares donde el movimiento
   comunica algo. Todo el contenido es visible aunque el JavaScript falle por completo.
 - Foco de teclado visible en todos los interactivos; el formulario es operable solo con teclado.
+- **La regresiva no se anuncia dígito a dígito.** Un `aria-live` sobre un elemento que cambia cada
+  segundo deja a un lector de pantalla dictando números sin parar, y vuelve la página inutilizable
+  para quien lo usa. Los dígitos son visuales; el anuncio vive en un párrafo solo para lectores de
+  pantalla que cambia de texto únicamente al cruzar un umbral:
+
+  | Falta | Anuncio |
+  |---|---|
+  | más de un día | «Faltan 2 días para el conversatorio» |
+  | entre 1 hora y 1 día | «Faltan 11 horas para el conversatorio» |
+  | menos de 1 hora | «Faltan 23 minutos para el conversatorio» |
+  | menos de 1 minuto | «El conversatorio empieza en menos de un minuto» |
+
+  La granularidad sube conforme se acerca la hora: minutos en la última hora, que es cuando el dato
+  importa. La función que arma esa frase es pura y vive en `logic.js` con su prueba.
 - `alt` descriptivo real en cada foto; el mapa embebido lleva `title`.
 - Contraste mínimo AA: texto sobre bermellón siempre blanco puro; `--gris` verificado sobre carbón
   y sobre hueso.

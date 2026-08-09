@@ -25,6 +25,7 @@
 - Correo: `anthony_1908@yahoo.com`. IG gym `https://www.instagram.com/chukucross/`. IG coach `https://www.instagram.com/anthonyfit20/`.
 - Toda imagen lleva `loading="lazy"` y `alt` descriptivo real (nunca `alt=""` salvo decorativas puras).
 - `prefers-reduced-motion: reduce` debe desactivar scroll suave, `scroll-snap`, transiciones y zoom de galería; la regresiva pasa a 60 s.
+- **Ninguna región `aria-live` puede colgar de un elemento que cambia cada segundo.** Los dígitos de la regresiva son visuales y no se anuncian. El anuncio para lector de pantalla vive en un párrafo aparte que solo cambia de texto al cruzar un umbral (día → hora → minuto), de modo que suena unas pocas veces por hora y una vez por minuto en la última hora.
 - **Sin animaciones de revelado por scroll y sin cinta deslizante.** El movimiento vive solo en la regresiva y el contador de actos. Todo el contenido debe ser legible aunque el JS falle por completo — no ocultar nada con CSS que dependa de JavaScript para mostrarse.
 
 ## File Structure
@@ -634,7 +635,7 @@ Insertar antes del cierre de la IIFE:
 
   function pintarCuenta(e) {
     elSlot.innerHTML =
-      '<ol class="cuenta" aria-live="polite">' +
+      '<ol class="cuenta">' +
         '<li><b>' + String(e.d).padStart(2,'0') + '</b><span>Días</span></li>' +
         '<li><b>' + String(e.h).padStart(2,'0') + '</b><span>Horas</span></li>' +
         '<li><b>' + String(e.m).padStart(2,'0') + '</b><span>Min</span></li>' +
