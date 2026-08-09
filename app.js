@@ -196,4 +196,16 @@
       window.open(r.url, '_blank', 'noopener');
     });
   }
+
+  // --- datos que salen de CONFIG ---
+  const hs = document.getElementById('horario-semana');
+  const hsab = document.getElementById('horario-sabado');
+  if (hs) hs.textContent = CONFIG.horario.semana;
+  if (hsab) hsab.textContent = CONFIG.horario.sabado;
+
+  const correo = document.getElementById('correo');
+  if (correo) { correo.textContent = CONFIG.correo; correo.href = 'mailto:' + CONFIG.correo; }
+
+  const anio = document.getElementById('anio');
+  if (anio) anio.textContent = String(new Date().getFullYear());
 })();

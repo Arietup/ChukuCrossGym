@@ -196,3 +196,33 @@ a{color:inherit}
 .campo select option{background:var(--carbon);color:var(--hueso)}
 .campo .error{font-family:var(--texto);font-size:.82rem;color:var(--naranja);min-height:1.2em}
 .campo--malo input,.campo--malo textarea{border-color:var(--naranja)}
+
+.loc{display:grid;grid-template-columns:1fr 1.15fr;gap:0;min-height:70vh}
+.loc__info{padding:clamp(38px,6vw,84px);background:var(--carbon-2)}
+.loc__map{background:var(--carbon-2);min-height:340px}
+.loc__map iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(1) contrast(1.1)}
+.datos{margin:30px 0 34px}
+.datos div{padding:16px 0;border-bottom:1px solid rgba(239,233,222,.16)}
+.datos dt{font-family:var(--dato);font-size:.6rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gris);margin-bottom:6px}
+.datos dd{margin:0;font-size:1.02rem}
+
+.pie{background:var(--carbon);border-top:1px solid rgba(239,233,222,.14);padding:56px 0 26px}
+.pie__in{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px}
+.pie__marca{display:flex;gap:14px;align-items:flex-start}
+.pie__marca img{width:62px;height:62px;border-radius:4px}
+.pie h4{font-family:var(--dato);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gris);margin:0 0 14px;font-weight:400}
+.pie a{color:var(--hueso);text-decoration:none;display:block;padding:5px 0;font-size:.9rem}
+.pie a:hover{color:var(--naranja)}
+.pie__legal{text-align:center;color:var(--gris);font-family:var(--dato);font-size:.6rem;
+  letter-spacing:.12em;text-transform:uppercase;margin:44px 0 0;
+  border-top:1px solid rgba(239,233,222,.1);padding-top:24px}
+
+.flota{position:fixed;right:20px;bottom:20px;z-index:45;background:var(--naranja);color:var(--blanco);
+  border-radius:50px;padding:14px 20px;display:flex;align-items:center;gap:10px;
+  text-decoration:none;font-weight:700;font-size:.86rem;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);transition:background .18s,transform .18s}
+.flota:hover{background:var(--brasa);transform:translateY(-2px)}
+.flota svg{width:21px;height:21px;fill:currentColor}
+@media (max-width:640px){ .flota span{display:none} .flota{padding:15px;border-radius:50%} }
