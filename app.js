@@ -62,4 +62,87 @@
     }, { threshold: 0.1 });
     io2.observe(finActoI);
   }
+
+  // --- panel 01: cambia solo según la fecha ---
+  const TEXTOS = {
+    antes: {
+      eyebrow: 'El Triunfo · 09.08.2026 · 10:00',
+      titulo:  'Conversatorio<br><span>de culturismo</span>',
+      lead:    'Posing, categorías, invitados nacionales y marcas presentes. Entrada libre.',
+      cta:     '<a class="btn btn--naranja" href="#" data-wa data-wa-msg="Hola, quiero reservar mi cupo para el conversatorio del 9 de agosto.">Reservar mi cupo</a>' +
+               '<a class="btn btn--hueso" href="#programa">Ver el programa</a>'
+    },
+    hoy: {
+      eyebrow: 'Es hoy · 10:00 · Cdla. Jaime Roldós',
+      titulo:  'Es hoy:<br><span>te esperamos</span>',
+      lead:    'Conversatorio de culturismo en el Chuku Cross Gym. Muro de Berlín, frente al puente peatonal.',
+      cta:     '<a class="btn btn--naranja" href="#ubicacion">Cómo llegar</a>' +
+               '<a class="btn btn--hueso" href="#" data-wa data-wa-msg="Hola, voy en camino al conversatorio. ¿Alguna indicación?">Escribir al gym</a>'
+    },
+    pasado: {
+      eyebrow: 'El Triunfo · Guayas · Ecuador',
+      titulo:  'Chuku<br><span>Cross Gym</span>',
+      lead:    'El gym del cantón. Fierro, piso y ganas, con un coach que te corrige de verdad.',
+      cta:     '<a class="btn btn--naranja" href="#" data-wa data-wa-msg="Hola, quiero entrenar en el Chuku Cross Gym.">Entrena con nosotros</a>' +
+               '<a class="btn btn--hueso" href="#planes">Ver membresías</a>'
+    }
+  };
+
+  const elEyebrow = document.getElementById('evento-eyebrow');
+  const elTitulo  = document.getElementById('evento-title');
+  const elLead    = document.getElementById('evento-lead');
+  const elSlot    = document.getElementById('evento-slot');
+  let faseActual = null;
+
+  function pintarCuenta(e) {
+    elSlot.innerHTML =
+      '<ol class="cuenta" aria-live="polite">' +
+        '<li><b>' + String(e.d).padStart(2,'0') + '</b><span>Días</span></li>' +
+        '<li><b>' + String(e.h).padStart(2,'0') + '</b><span>Horas</span></li>' +
+        '<li><b>' + String(e.m).padStart(2,'0') + '</b><span>Min</span></li>' +
+        '<li><b>' + String(e.s).padStart(2,'0') + '</b><span>Seg</span></li>' +
+      '</ol>' +
+      '<div class="panel__cta">' + TEXTOS.antes.cta + '</div>';
+  }
+
+  function aplicarFase(e) {
+    if (e.fase === faseActual) {
+      if (e.fase === 'antes') {
+        const b = elSlot.querySelectorAll('.cuenta b');
+        if (b.length === 4) {
+          b[0].textContent = String(e.d).padStart(2,'0');
+          b[1].textContent = String(e.h).padStart(2,'0');
+          b[2].textContent = String(e.m).padStart(2,'0');
+          b[3].textContent = String(e.s).padStart(2,'0');
+        }
+      }
+      return;
+    }
+    faseActual = e.fase;
+    const t = TEXTOS[e.fase];
+    elEyebrow.textContent = t.eyebrow;
+    elTitulo.innerHTML = t.titulo;
+    elLead.textContent = t.lead;
+    elSlot.innerHTML = (e.fase === 'antes') ? '' : '<div class="panel__cta">' + t.cta + '</div>';
+    if (e.fase === 'antes') pintarCuenta(e);
+
+    document.body.classList.remove('fase-antes','fase-hoy','fase-pasado');
+    document.body.classList.add('fase-' + e.fase);
+
+    // los CTA recién insertados necesitan su href de WhatsApp
+    elSlot.querySelectorAll('[data-wa]').forEach(function (a) {
+      a.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(a.getAttribute('data-wa-msg'));
+      a.target = '_blank'; a.rel = 'noopener';
+    });
+  }
+
+  function tick() {
+    aplicarFase(estadoEvento(CONFIG.evento.inicio, new Date(), CONFIG.evento.duracionHoras));
+  }
+  tick();
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(tick, 1000);
+  } else {
+    setInterval(tick, 60000);
+  }
 })();

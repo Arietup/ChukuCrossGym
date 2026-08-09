@@ -86,3 +86,13 @@ a{color:inherit}
 .contador li.on b{color:var(--naranja)}
 .contador li.on b::after{width:20px;height:3px;background:var(--naranja)}
 .contador.oculto{opacity:0;pointer-events:none}
+
+.cuenta{display:flex;gap:12px;margin:32px 0 34px;padding:0;list-style:none}
+.cuenta li{background:rgba(239,233,222,.07);border:1px solid rgba(239,233,222,.16);
+  padding:12px 0;min-width:78px;text-align:center}
+.cuenta b{font-family:var(--dato);font-weight:700;font-size:1.6rem;color:var(--naranja);
+  display:block;line-height:1;font-variant-numeric:tabular-nums}
+.cuenta span{font-family:var(--dato);font-size:.56rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gris);display:block;margin-top:7px}
+.panel__cta{display:flex;gap:14px;flex-wrap:wrap}
+@media (max-width:520px){ .cuenta li{min-width:0;flex:1} .cuenta b{font-size:1.2rem} }
